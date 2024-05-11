@@ -8,6 +8,9 @@ In this simple, but teachable project, we can reach the main concepts of them.
 
 Using a open source project as a auth module[Keycloak], to generate a valid Json Web Token and throw forward to a proxy[Ory Oathkeeper].
 
+## Kong
+
+Kong gateway can be an excellent solution for an ingress load balancer and API gateway if you do not want vendor lock-in of any cloud API Gateways in your application. Kong uses OpenResty and Lua. OpenResty extends Nginx with Lua scripting to use Nginx's event model for non-blocking I/O with HTTP clients and remote backends like PostgreSQL, Memcached, and Redis. OpenResty is not an Nginx fork, and Kong is not an Openresty fork. Kong uses OpenResty to enable API gateway features.
 
 ## Keycloak 
 
@@ -49,9 +52,7 @@ docker-compose up --build
 
 3. Lets create a client named __my-client__:
 
-4. Lets change to _confidential_ option, so we must use the Client Id and the Secret Id as part of the authentication.
-
-* You need to enter a valid URI redirect page. In any case, just type _localhost_ to pass by this option.
+4. Turn on __Client authentication__ option in capability config
 
 5. Get the client and secret values on _Credential_ TAB:
 
@@ -100,7 +101,11 @@ Until this point, all we got is a functional auth module. With Ory Oathkeeper we
 
 3. With a valid token on header to fill the Authorization Header, we can get the response from successfull
 
+### Testing kong gateway
 
+run __kong-config.sh__ 
+
+Now you can call GET http://127.0.0.1:8000/cities and dont forget to pass authorization token in the header of request
 
 
 
