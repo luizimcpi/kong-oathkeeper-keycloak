@@ -1,0 +1,35 @@
+version: "3.5"
+
+services:
+  # APIS-images ###################################
+
+  ## Golang API ##
+  go-api:
+    build: ./apis/go-gyn
+    container_name: go-api
+    restart: always
+    ports:
+      - "8090:8080"
+    networks:
+      - custom_network
+  ##################################
+
+  # Proxy from Ory #################
+  oath-keeper:
+    build: ./oath-image
+    command: -c /config.yaml serve
+    container_name: oath
+    restart: always
+    ports:
+      - "4455:4455"
+      - "4456:4456"
+    networks:
+      - custom_network
+  ##################################
+
+networks:
+  custom_network:
+    external:
+      name: poc
+
+
